@@ -1,0 +1,1011 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ClockInOut Microservices",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/start-day": {
+            "post": {
+                "tags": [
+                    "Start/End Day"
+                ],
+                "summary": "Start Day",
+                "description": "Start Day",
+                "operationId": "startDay",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "start_day",
+                                    "cash",
+                                    "coin",
+                                    "stracher_bin"
+                                ],
+                                "properties": {
+                                    "start_day": {
+                                        "type": "integer"
+                                    },
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Start Day Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/end-day": {
+            "post": {
+                "tags": [
+                    "Start/End Day"
+                ],
+                "summary": "End Day",
+                "description": "End Day",
+                "operationId": "endDay",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "start_day",
+                                    "cash",
+                                    "coin",
+                                    "stracher_bin"
+                                ],
+                                "properties": {
+                                    "start_day": {
+                                        "type": "integer"
+                                    },
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "End Day Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/one-minute-cash-in": {
+            "post": {
+                "tags": [
+                    "Start/End Day"
+                ],
+                "summary": "One Minute Cash In",
+                "description": "One Minute Cash In",
+                "operationId": "oneMinuteCashIn",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "cash",
+                                    "coin",
+                                    "stracher_bin"
+                                ],
+                                "properties": {
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "One Minute Cash In Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/get-treminal-by-tid/{terminalID}": {
+            "get": {
+                "tags": [
+                    "Terminal"
+                ],
+                "summary": "Check Treminal Status",
+                "description": "Check Treminal Status",
+                "operationId": "getTreminalByTerminalId",
+                "parameters": [
+                    {
+                        "name": "terminalID",
+                        "in": "path",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Check Treminal Status Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/update": {
+            "post": {
+                "tags": [
+                    "Terminal"
+                ],
+                "summary": "Update Terminal Amount",
+                "description": "Update Terminal Amount",
+                "operationId": "updateTerminalAmount",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "amount",
+                                    "terminal_id"
+                                ],
+                                "properties": {
+                                    "amount": {
+                                        "type": "integer"
+                                    },
+                                    "terminal_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update Terminal Amount Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/start-treminal": {
+            "post": {
+                "tags": [
+                    "Start/End Terminal"
+                ],
+                "summary": "Start Terminal",
+                "description": "Start Terminal",
+                "operationId": "startTerminal",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "cash",
+                                    "coin",
+                                    "stracher_bin"
+                                ],
+                                "properties": {
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Start Terminal Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/end-treminal": {
+            "post": {
+                "tags": [
+                    "Start/End Terminal"
+                ],
+                "summary": "End Terminal",
+                "description": "End Terminal",
+                "operationId": "endTreminal",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "cash",
+                                    "coin",
+                                    "stracher_bin"
+                                ],
+                                "properties": {
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "End Terminal Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/check-treminal-status": {
+            "get": {
+                "tags": [
+                    "Start/End Terminal"
+                ],
+                "summary": "Check Treminal Status",
+                "description": "Check Treminal Status",
+                "operationId": "checkTreminalStatus",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Check Treminal Status Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cashier/clock-in": {
+            "post": {
+                "tags": [
+                    "Clock In/Out"
+                ],
+                "summary": "Clock In",
+                "description": "Clock In",
+                "operationId": "clockIn",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "skip"
+                                ],
+                                "properties": {
+                                    "skip": {
+                                        "type": "integer"
+                                    },
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clock In Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cashier/clock-out": {
+            "post": {
+                "tags": [
+                    "Clock In/Out"
+                ],
+                "summary": "Clock Out",
+                "description": "Clock Out",
+                "operationId": "clockOut",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "skip"
+                                ],
+                                "properties": {
+                                    "skip": {
+                                        "type": "integer"
+                                    },
+                                    "cash": {
+                                        "type": "integer"
+                                    },
+                                    "coin": {
+                                        "type": "integer"
+                                    },
+                                    "stracher_bin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Clock Out Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/verify-pin": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Verify Pin",
+                "description": "User Verify Pin Here",
+                "operationId": "authLogin",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "pin"
+                                ],
+                                "properties": {
+                                    "pin": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/create": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create User",
+                "description": "Create User",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "role_id",
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "pin",
+                                    "phone_no",
+                                    "gender",
+                                    "date_of_birth",
+                                    "marital_status"
+                                ],
+                                "properties": {
+                                    "role_id": {
+                                        "type": "integer"
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "pin": {
+                                        "type": "string"
+                                    },
+                                    "phone_no": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "marital_status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Create User Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/update": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User",
+                "description": "Update User",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "role_id",
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "pin",
+                                    "phone_no",
+                                    "gender",
+                                    "date_of_birth",
+                                    "marital_status"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "role_id": {
+                                        "type": "integer"
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "pin": {
+                                        "type": "string"
+                                    },
+                                    "phone_no": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "marital_status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update User Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/list": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User List",
+                "description": "User List",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "page",
+                                    "limit"
+                                ],
+                                "properties": {
+                                    "page": {
+                                        "type": "numeric"
+                                    },
+                                    "limit": {
+                                        "type": "numeric"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User List",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete User",
+                "description": "Delete User",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User List",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/sleep": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Sleep",
+                "description": "Sleep",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "name": "terminal-id",
+                        "in": "header",
+                        "description": "Terminal ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "128.0.0.1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logged out successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logged out successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
