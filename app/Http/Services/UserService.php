@@ -15,7 +15,8 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    function list($input) {
+    public function list($input)
+    {
 
         try {
 
@@ -31,7 +32,7 @@ class UserService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.list', ['module' => __('messages.module.user')]),
+                'message' => __('messages.common.list', ['module' => __('messages.module.hrms.employee')]),
                 'code' => Response::HTTP_OK,
                 'data' => $data,
             ];
@@ -59,20 +60,24 @@ class UserService
                 'date_of_birth' => $input['date_of_birth'],
                 'marital_status' => $input['marital_status'],
                 'pin' => md5($input['pin']),
+                'address' => $input['address'],
+                'city_or_town' => $input['city_or_town'],
+                'state_and_zip_code' => $input['state_and_zip_code'],
                 'emergency_contact_number' => $input['emergency_contact_number'] ?? null,
                 'emergency_contact_person' => $input['emergency_contact_person'] ?? null,
                 'relationshipe' => $input['relationshipe'] ?? null,
                 'registration_date' => getCurrentDateTime(),
-                'created_by' => auth()->user()->user_id,
+                'created_by' => $input['created_by'],//auth()->user()->user_id,
                 'created_at' => getCurrentDateTime(),
             ];
 
-            $this->userRepository->create($data);
+            $userData = $this->userRepository->create($data);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.user')]),
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.employee')]),
                 'code' => Response::HTTP_OK,
+                'data' => $userData
             ];
 
         } catch (\Exception $e) {
@@ -97,20 +102,24 @@ class UserService
                 'gender' => $input['gender'],
                 'date_of_birth' => $input['date_of_birth'],
                 'marital_status' => $input['marital_status'],
-                'updated_by' => auth()->user()->user_id,
-                'updated_at' => getCurrentDateTime(),
                 'pin' => md5($input['pin']),
+                'address' => $input['address'],
+                'city_or_town' => $input['city_or_town'],
+                'state_and_zip_code' => $input['state_and_zip_code'],
                 'emergency_contact_number' => $input['emergency_contact_number'] ?? null,
                 'emergency_contact_person' => $input['emergency_contact_person'] ?? null,
                 'relationshipe' => $input['relationshipe'] ?? null,
+                'updated_by' => $input['updated_by'],
+                'updated_at' => getCurrentDateTime(),
             ];
 
-            $this->userRepository->update($data, $input['user_id']);
+            $userData =$this->userRepository->update($data, $input['user_id']);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.update', ['module' => __('messages.module.user')]),
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.employee')]),
                 'code' => Response::HTTP_OK,
+                'data' => $userData
             ];
 
         } catch (\Exception $e) {
@@ -130,7 +139,7 @@ class UserService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.user')]),
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.employee')]),
                 'code' => Response::HTTP_OK,
             ];
 

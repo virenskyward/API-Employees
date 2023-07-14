@@ -35,6 +35,10 @@ class CreateUserRequest extends FormRequest
             'date_of_birth' => 'required|date_format:Y-m-d',
             'marital_status' => 'required|in:UnMarried,Married',
             'pin' => 'required',
+            'confirm_pin' => 'required_with:pin|same:pin',
+            'address' => 'required',
+            'city_or_town' => 'required',
+            'state_and_zip_code' => 'required',
         ];
         
     }

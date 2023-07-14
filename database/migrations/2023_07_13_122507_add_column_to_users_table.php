@@ -14,10 +14,13 @@ class AddColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('emergency_contact_person')->after('pin')->nullable()->comment('Emergency Contact Person');
-            $table->string('emergency_contact_number')->after('emergency_contact_person')->nullable()->comment('Emergency Contact Person');
-            $table->string('relationshipe')->after('emergency_contact_number')->nullable()->comment('Emergency Contact Person');
-            $table->string('registration_date')->after('relationshipe')->nullable()->comment('Emergency Contact Person');
+            $table->string('address')->after('pin')->nullable()->comment('Address');
+            $table->string('city_or_town')->after('address')->nullable()->comment('City Or Town');
+            $table->string('state_and_zip_code')->after('city_or_town')->nullable()->comment('State and zip code');
+            $table->string('emergency_contact_person')->after('state_and_zip_code')->nullable()->comment('Emergency Contact Person');
+            $table->string('emergency_contact_number')->after('emergency_contact_person')->nullable()->comment('Emergency Contact number');
+            $table->string('relationshipe')->after('emergency_contact_number')->nullable()->comment('Relationshipe');
+            $table->string('registration_date')->after('relationshipe')->nullable()->comment('Registration Date');
         });
     }
 
@@ -29,10 +32,13 @@ class AddColumnToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('emergency_contact_person')->after('pin')->nullable()->comment('Emergency Contact Person');
-            $table->string('emergency_contact_number')->after('emergency_contact_person')->nullable()->comment('Emergency Contact Person');
-            $table->string('relationshipe')->after('emergency_contact_number')->nullable()->comment('Emergency Contact Person');
-            $table->string('registration_date')->after('relationshipe')->nullable()->comment('Emergency Contact Person');
+           $table->string('address')->after('pin')->nullable()->comment('Address');
+            $table->string('city_or_town')->after('address')->nullable()->comment('City Or Town');
+            $table->string('state_and_zip_code')->after('city_or_town')->nullable()->comment('State and zip code');
+            $table->string('emergency_contact_person')->after('state_and_zip_code')->nullable()->comment('Emergency Contact Person');
+            $table->string('emergency_contact_number')->after('emergency_contact_person')->nullable()->comment('Emergency Contact number');
+            $table->string('relationshipe')->after('emergency_contact_number')->nullable()->comment('Relationshipe');
+            $table->string('registration_date')->after('relationshipe')->nullable()->comment('Registration Date');
         });
     }
 }

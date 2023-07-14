@@ -12,13 +12,14 @@ class UserRepository
 
         try {
 
-            DB::transaction(function () use ($data) {
+            $userData = '';
+            DB::transaction(function () use ($data, &$userData) {
 
-                User::create($data);
+                $userData = User::create($data);
 
             });
 
-            return true;
+            return $userData;
 
         } catch (\Exception $e) {
 
@@ -32,13 +33,14 @@ class UserRepository
 
         try {
 
-            DB::transaction(function () use ($data, $userId) {
+            $userData = '';
+            DB::transaction(function () use ($data, $userId, &$userData) {
 
                 User::where('user_id', $userId)->update($data);
-
+                $userData = User::where('user_id', $userId)->first();
             });
 
-            return true;
+            return $userData;
 
         } catch (\Exception $e) {
 
@@ -52,10 +54,7 @@ class UserRepository
 
         try {
 
-            return User::select('role_id', 'first_name', 'last_name', 'email', 'phone_no',
-                'gender', 'date_of_birth', 'marital_status', 'clock_status',
-                'user_status'
-            )->with(['roles' => function($query) {
+            return User::with(['roles' => function($query) {
                 $query->select(['role_id', 'role_name', 'role_slug', 'role_status']);
             }])->paginate($input['limit']);
 

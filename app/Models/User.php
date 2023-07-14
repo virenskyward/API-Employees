@@ -37,6 +37,9 @@ class User extends Authenticatable
         'user_status',
         'created_by',
         'created_at',
+        'address',
+        'city_or_town',
+        'state_and_zip_code',
         'emergency_contact_person',
         'emergency_contact_number',
         'relationshipe',
@@ -49,7 +52,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'pin',
         'remember_token',
         'created_at',
         'updated_at',

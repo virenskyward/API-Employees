@@ -36,6 +36,10 @@ class UpdateUserRequest extends FormRequest
         $validation['date_of_birth'] = 'required|date_format:Y-m-d';
         $validation['marital_status'] = 'required|in:UnMarried,Married';
         $validation['pin'] = 'required';
+        $validation['confirm_pin'] = 'required_with:pin|same:pin';
+        $validation['address'] = 'required';
+        $validation['city_or_town'] = 'required';
+        $validation['state_and_zip_code'] = 'required';
         
         return $validation;
 
