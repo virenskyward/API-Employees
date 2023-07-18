@@ -76,25 +76,3 @@ if (!function_exists('failedValidation')) {
         ]));
     }
 }
-
-if (!function_exists('getPermisionAction')) {
-    function getPermisionAction()
-    {
-        $permissionActions =  \App\Models\PermissionAction::select('permission_action_name')
-                                ->where('permission_action_status', 1)
-                                ->get()->toArray();
-                                
-        return !empty($permissionActions) ? array_column($permissionActions, 'permission_action_name') : [];
-    }
-}
-
-if (!function_exists('getUserPermisstionAcction')) {
-    function getUserPermisstionAcction($userId)
-    {
-        $permission =  \App\Models\Permission::with(['permissionAction' => function ($query) {
-                                $query->select('permission_action_name');
-                            }])->where('user_id', $userId)
-                        ->get()->toArray();
-        return !empty($permission) ? array_column($permission, 'permission_action_name') : [];
-    }
-}

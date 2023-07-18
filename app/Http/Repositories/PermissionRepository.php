@@ -76,4 +76,24 @@ class PermissionRepository
     {
         return Permission::where('user_id', $userID)->get();
     }
+
+    public function getPermisionAction()
+    {
+        $permissionActions =  \App\Models\PermissionAction::select('permission_action_name')
+                                ->where('permission_action_status', 1)
+                                ->get()->toArray();
+                                
+        return !empty($permissionActions) ? array_column($permissionActions, 'permission_action_name') : [];
+    }
+
+    public function getUserPermisstionAcction($userId)
+    {
+        $permissions =  Permission::with(['permissionAction' => function ($query) {
+                            $query->select('permission_action_id','permission_action_name');
+                        }])->where('user_id', $userId)
+                        ->get()->toArray();
+        $permissionActionNames = array_column($permissions, 'permission_action');
+
+        return  array_column($permissionActionNames, 'permission_action_name');
+    }
 }
