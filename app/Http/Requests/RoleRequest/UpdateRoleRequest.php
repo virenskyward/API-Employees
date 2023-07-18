@@ -28,6 +28,7 @@ class UpdateRoleRequest extends FormRequest
     {
         
         return [
+            "role_id" => 'required|exists:roles,role_id',
             'role_name' => 'required'
         ];
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\RoleService;
 use App\Http\Requests\RoleRequest\CreateRoleRequest;
 use App\Http\Requests\RoleRequest\UpdateRoleRequest;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -21,9 +22,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function list(Request $request)
     {
-        $response = $this->roleService->list();
+        $response = $this->roleService->list($request->all());
         return $this->sendResponse($response);
     }
 
@@ -45,9 +46,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRoleRequest $request, $id)
+    public function update(UpdateRoleRequest $request)
     {
-        $response = $this->roleService->update($request->all(), $id);
+        $response = $this->roleService->update($request->all());
         return $this->sendResponse($response);
     }
 

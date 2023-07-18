@@ -8,46 +8,44 @@ use Illuminate\Support\Facades\DB;
 class RoleRepository
 {
 
-    public function list() {
-        
+    public function list($input)
+    {
+
         try {
-                $role = [];
-                
-                DB::transaction(function () use (&$role) {
-                    
-                    $role = Role::select('id', 'role_name')->get();
-                    
-                });
+            $role = [];
+
+            DB::transaction(function () use (&$role, $input) {
+
+                $role = Role::paginate($input['limit']);
+
+            });
 
             return $role;
 
         } catch (\Exception $e) {
-            
+
             error_log($e->getMessage());
             throw $e;
         }
 
     }
-    
+
     public function insert($data)
     {
-        
+
         try {
-                
-                DB::transaction(function () use ($data) {
-                    
-                    Role::create([
-                        'role_name' => $data['role_name'],
-                        'created_by' => 1,
-                        'created_at' => getCurrentDateTime()
-                    ]);
 
-                });
+            $roleData = [];
+            DB::transaction(function () use ($data, &$roleData) {
 
-            return true;
+                $roleData = Role::create($data);
+
+            });
+
+            return $roleData;
 
         } catch (\Exception $e) {
-            
+
             error_log($e->getMessage());
             throw $e;
         }
@@ -56,23 +54,19 @@ class RoleRepository
 
     public function update($data, $id)
     {
-        
-        try {
-                            
-                DB::transaction(function () use ($data, $id) {
-                    
-                    Role::where(['role_id' => $id])->update([
-                        'role_name' => $data['role_name'],
-                        'updated_by' => 1,
-                        'updated_at' => getCurrentDateTime()
-                    ]);
 
-                });
+        try {
+
+            DB::transaction(function () use ($data, $id) {
+
+                Role::where(['role_id' => $id])->update($data);
+
+            });
 
             return true;
 
         } catch (\Exception $e) {
-            
+
             error_log($e->getMessage());
             throw $e;
         }
@@ -81,24 +75,21 @@ class RoleRepository
 
     public function delete($id)
     {
-        
-        try {
-                            
-                DB::transaction(function () use ($id) {
-                    
-                    $role = Role::find($id);
-                    
-                    $role->deleted_by = 1;
-                    $role->save();
 
-                    $role->delete();
-                    
-                });
+        try {
+
+            DB::transaction(function () use ($id) {
+
+                $role = Role::whereIn('role_id', explode(',',$id));
+                $role->update(['deleted_by' => 1]);
+                $role->delete();
+
+            });
 
             return true;
 
         } catch (\Exception $e) {
-            
+
             error_log($e->getMessage());
             throw $e;
         }

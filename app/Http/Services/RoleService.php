@@ -15,15 +15,16 @@ class RoleService
         $this->roleRepository = $roleRepository;
     }
 
-    public function list() {
+    public function list($input)
+    {
 
         try {
 
-            $data = $this->roleRepository->list();
+            $data = $this->roleRepository->list($input);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.list', ['module' => __('messages.module.role')]),
+                'message' => __('messages.common.list', ['module' => __('messages.module.hrms.role')]),
                 'code' => Response::HTTP_OK,
                 'data' => [
                     "roles" => $data,
@@ -42,13 +43,19 @@ class RoleService
     {
 
         try {
+            $data = [
+                'role_name' => $input['role_name'],
+                'created_by' => 1,
+                'created_at' => getCurrentDateTime(),
+            ];
 
-            $this->roleRepository->insert($input);
+            $roleData = $this->roleRepository->insert($data);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.role')]),
-                'code' => Response::HTTP_OK
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.role')]),
+                'code' => Response::HTTP_OK,
+                'data' => $roleData
             ];
 
         } catch (\Exception $e) {
@@ -59,17 +66,22 @@ class RoleService
 
     }
 
-    public function update($input, $id)
+    public function update($input)
     {
 
         try {
+            $data = [
+                'role_name' => $input['role_name'],
+                'updated_by' => 1,
+                'updated_at' => getCurrentDateTime(),
+            ];
 
-            $this->roleRepository->update($input, $id);
+            $this->roleRepository->update($data, $input['role_id']);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.update', ['module' => __('messages.module.role')]),
-                'code' => Response::HTTP_OK
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.role')]),
+                'code' => Response::HTTP_OK,
             ];
 
         } catch (\Exception $e) {
@@ -89,8 +101,8 @@ class RoleService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.role')]),
-                'code' => Response::HTTP_OK
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.role')]),
+                'code' => Response::HTTP_OK,
             ];
 
         } catch (\Exception $e) {
