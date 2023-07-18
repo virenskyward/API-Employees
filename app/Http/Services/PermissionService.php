@@ -23,7 +23,7 @@ class PermissionService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.list', ['module' => __('messages.module.permission')]),
+                'message' => __('messages.common.list', ['module' => __('messages.module.hrms.permission')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
                 'data' => [
@@ -69,7 +69,7 @@ class PermissionService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.permission')]),
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.permission')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
@@ -91,7 +91,7 @@ class PermissionService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.permission_module')]),
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.permission_module')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];

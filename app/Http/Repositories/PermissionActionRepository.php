@@ -38,14 +38,7 @@ class PermissionActionRepository
 
             DB::transaction(function () use ($data) {
 
-                PermissionAction::create([
-                    'permission_module_id' => $data['permission_module_id'],
-                    'permission_action_name' => $data['permission_action_name'],
-                    'permission_action_label' => $data['permission_action_label'],
-                    'permission_action_status' => $data['permission_action_status'],
-                    'created_by' => 1,
-                    'created_at' => getCurrentDateTime(),
-                ]);
+                PermissionAction::create($data);
 
             });
 
@@ -65,14 +58,7 @@ class PermissionActionRepository
         try {
             DB::transaction(function () use ($data, $id) {
 
-                PermissionAction::where(['permission_action_id' => $id])->update([
-                    'permission_module_id' => $data['permission_module_id'],
-                    'permission_action_name' => $data['permission_action_name'],
-                    'permission_action_label' => $data['permission_action_label'],
-                    'permission_action_status' => $data['permission_action_status'],
-                    'updated_by' => 1,
-                    'updated_at' => getCurrentDateTime(),
-                ]);
+                PermissionAction::where(['permission_action_id' => $id])->update($data);
 
             });
 

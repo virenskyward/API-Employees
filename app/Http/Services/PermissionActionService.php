@@ -49,12 +49,20 @@ class PermissionActionService
     {
 
         try {
+            $data = [
+                'permission_module_id' => $input['permission_module_id'],
+                'permission_action_name' => $input['permission_action_name'],
+                'permission_action_label' => $input['permission_action_label'],
+                'permission_action_status' => $input['permission_action_status'],
+                'created_by' => 1,
+                'created_at' => getCurrentDateTime(),
+            ];
 
-            $this->permissionActionRepository->insert($input);
+            $this->permissionActionRepository->insert($data);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.permission_action')]),
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.permission_action')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
@@ -67,16 +75,24 @@ class PermissionActionService
 
     }
 
-    public function update($input, $id)
+    public function update($input)
     {
 
         try {
+            $data = [
+                'permission_module_id' => $input['permission_module_id'],
+                'permission_action_name' => $input['permission_action_name'],
+                'permission_action_label' => $input['permission_action_label'],
+                'permission_action_status' => $input['permission_action_status'],
+                'updated_by' => 1,
+                'updated_at' => getCurrentDateTime(),
+            ];
 
-            $this->permissionActionRepository->update($input, $id);
+            $this->permissionActionRepository->update($data, $input['permission_action_id']);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.update', ['module' => __('messages.module.permission_action')]),
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.permission_action')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
@@ -98,7 +114,7 @@ class PermissionActionService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.permission_action')]),
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.permission_action')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];

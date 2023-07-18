@@ -4,7 +4,6 @@ namespace App\Http\Requests\PermissionModuleRequest;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreatePermissionModuleRequest extends FormRequest
 {
@@ -28,6 +27,7 @@ class CreatePermissionModuleRequest extends FormRequest
 
         return [
             'permission_module_name' => 'required',
+            'permission_module_status' => 'required',
         ];
 
     }

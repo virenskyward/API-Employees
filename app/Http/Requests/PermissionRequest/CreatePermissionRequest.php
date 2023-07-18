@@ -4,7 +4,6 @@ namespace App\Http\Requests\PermissionRequest;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreatePermissionRequest extends FormRequest
 {
@@ -28,7 +27,7 @@ class CreatePermissionRequest extends FormRequest
         return [
             'user_id' => 'required|exists:users,user_id',
             'premissions.*.role_id' => 'required|exists:roles,role_id',
-            'premissions.*.permission_action_id' => 'required|exists:permission_actions,permission_action_id'
+            'premissions.*.permission_action_id' => 'required|exists:permission_actions,permission_action_id',
         ];
 
     }

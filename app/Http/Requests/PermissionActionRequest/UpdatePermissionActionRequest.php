@@ -4,7 +4,6 @@ namespace App\Http\Requests\PermissionActionRequest;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdatePermissionActionRequest extends FormRequest
 {
@@ -27,7 +26,8 @@ class UpdatePermissionActionRequest extends FormRequest
     {
 
         return [
-            'permission_module_id' => 'required',
+            'permission_action_id' => 'required|exists:permission_actions,permission_action_id',
+            'permission_module_id' => 'required|exists:permission_modules,permission_module_id',
             'permission_action_name' => 'required',
             'permission_action_status' => 'required',
         ];

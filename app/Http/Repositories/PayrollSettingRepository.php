@@ -53,11 +53,8 @@ class PayrollSettingRepository
 
             DB::transaction(function () use ($id) {
 
-                $payrollSetting = PayrollSetting::find($id);
-
-                $payrollSetting->deleted_by = auth()->user()->user_id;
-                $payrollSetting->save();
-
+                $payrollSetting = PayrollSetting::whereIn('payroll_setting_id', explode(',',$id));
+                $payrollSetting->update(['deleted_by' => 1]);
                 $payrollSetting->delete();
 
             });

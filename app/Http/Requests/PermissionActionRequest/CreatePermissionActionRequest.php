@@ -4,7 +4,6 @@ namespace App\Http\Requests\PermissionActionRequest;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreatePermissionActionRequest extends FormRequest
 {
@@ -29,11 +28,11 @@ class CreatePermissionActionRequest extends FormRequest
             'permission_module_id' => 'required',
             'permission_action_name' => 'required',
             'permission_action_status' => 'required',
+            'permission_action_label' => 'required',
         ];
-
     }
 
-        public function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator)
     {
         failedValidation(false, $validator->errors()->first());
     }

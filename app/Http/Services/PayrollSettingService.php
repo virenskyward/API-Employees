@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\HHttpTTP\Repositories\PayrollSettingRepository;
+use App\Http\Repositories\PayrollSettingRepository;
 use Illuminate\Http\Response;
 
 class PayrollSettingService

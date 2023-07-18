@@ -52,6 +52,6 @@ class Permission extends Model
     //Get the user permission action
     public function permissionAction()
     {
-        return $this->belongsTo(PermissionAction::class, 'permission_action_id', 'permission_action_id');
+        return $this->hasOne(PermissionAction::class, 'permission_action_id', 'permission_action_id');
     }
 }

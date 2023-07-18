@@ -51,11 +51,11 @@ class PermissionAction extends Model
         'deleted_at'
     ];
 
-    // Return the Action
-    public function permission()
-    {
-        return $this->hasMany(\App\Models\Permission::class, 'permission_action_id', 'permission_action_id');
-    }
+    // // Return the Action
+    // public function permission()
+    // {
+    //     return $this->hasMany(\App\Models\Permission::class, 'permission_action_id', 'permission_action_id');
+    // }
 
     // Return the Action
     public function permissionModule()

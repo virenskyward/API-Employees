@@ -27,6 +27,7 @@ class UpdatePermissionRequest extends FormRequest
     {
 
         return [
+            'permission_id' => 'required|exists:permissions,permission_id',
             'role_id' => 'required',
             'permission_action_id' => 'required'
         ];

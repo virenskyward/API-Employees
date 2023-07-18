@@ -71,11 +71,8 @@ class UserRepository
 
             DB::transaction(function () use ($id) {
 
-                $user = User::find($id);
-
-                $user->deleted_by = 1;
-                $user->save();
-
+                $user = User::whereIn('user_id', explode(',',$id));
+                $user->update(['deleted_by' => 1]);
                 $user->delete();
 
             });

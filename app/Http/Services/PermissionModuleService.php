@@ -23,7 +23,7 @@ class PermissionModuleService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.list', ['module' => __('messages.module.permission_module')]),
+                'message' => __('messages.common.list', ['module' => __('messages.module.hrms.permission_module')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
                 'data' => [
@@ -49,12 +49,18 @@ class PermissionModuleService
     {
 
         try {
+            $data = [
+                'permission_module_name' => $input['permission_module_name'],
+                'permission_module_status' => $input['permission_module_status'] ?? 1,
+                'created_by' => 1,
+                'created_at' => getCurrentDateTime(),
+            ];
 
-            $this->permissionModuleRepository->insert($input);
+            $this->permissionModuleRepository->insert($data);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.permission_module')]),
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.permission_module')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
@@ -71,12 +77,18 @@ class PermissionModuleService
     {
 
         try {
+            $data = [
+                    'permission_module_name' => $input['permission_module_name'],
+                    'permission_module_status' => $input['permission_module_status'],
+                    'updated_by' => 1,
+                    'updated_at' => getCurrentDateTime(),
+            ];
 
-            $this->permissionModuleRepository->update($input, $id);
+            $this->permissionModuleRepository->update($data, $id);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.update', ['module' => __('messages.module.permission_module')]),
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.permission_module')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
@@ -98,7 +110,7 @@ class PermissionModuleService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.permission_module')]),
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.permission_module')]),
                 'code' => Response::HTTP_OK,
                 'httpCode' => Response::HTTP_OK,
             ];
