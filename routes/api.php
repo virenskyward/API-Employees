@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\CashAdvanceSettingController;
+use App\Http\Controllers\Api\LeaveRequestController;
+use App\Http\Controllers\Api\LeaveTypeController;
 use App\Http\Controllers\Api\PayrollSettingController;
 use App\Http\Controllers\Api\PermissionActionController;
 use App\Http\Controllers\Api\PermissionController;
@@ -70,6 +72,23 @@ Route::middleware(['permission'])->group(function () {
         Route::post('/create', [PayrollSettingController::class, 'create'])->name('payroll.setting.create');
         Route::post('/update', [PayrollSettingController::class, 'update'])->name('payroll.setting.update');
         Route::delete('/delete/{id}', [PayrollSettingController::class, 'destroy'])->name('payroll.setting.destroy');
+    });
+
+    Route::group(['prefix' => 'leave-request'], function () {
+        Route::post('/list', [LeaveRequestController::class, 'list'])->name('leave.request.list');
+        Route::post('/create', [LeaveRequestController::class, 'createLeaveRequest'])->name('leave.request.create');
+        Route::post('/update', [LeaveRequestController::class, 'updateLeaveRequest'])->name('leave.request.update');
+        Route::delete('/delete/{id}', [LeaveRequestController::class, 'destroy'])->name('leave.request.destroy');
+        Route::post('/get-leave-request', [LeaveRequestController::class, 'getLeaveRequest'])->name('leave.request.get');
+    });
+
+    Route::group(['prefix' => 'leave'], function () {
+        Route::get('/leavetypes', [LeaveTypeController::class, 'index'])->name('leave_types.list');
+        Route::get('/leavetypes/{leaveTypeUuid}', [LeaveTypeController::class, 'show'])->name('leave_types.show');
+        Route::post('/leavetypes', [LeaveTypeController::class, 'create'])->name('leave_types.create');
+        Route::post('/leavetypes/{leaveTypeId}', [LeaveTypeController::class, 'update'])->name('leave_types.update');
+        Route::delete('/leavetypes/{leaveTypeId}', [LeaveTypeController::class, 'destroy'])
+            ->name('leave_types.destroy');
     });
 });
 // });

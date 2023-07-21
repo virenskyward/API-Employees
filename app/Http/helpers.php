@@ -11,18 +11,6 @@ if (!function_exists('getCurrentDateTime')) {
     }
 }
 
-if (!function_exists('generatePIN')) {
-    function generatePIN($length = 6)
-    {
-        $digit = '0123456789';
-        $pin = '';
-        for ($i = 0; $i < $length; $i++) {
-            $pin .= $digit[random_int(0, strlen($digit) - 1)];
-        }
-        return $pin;
-    }
-}
-
 if (!function_exists('curlCall')) {
     function curlCall($endpoint, $params, $authorization, $method, $terminalID)
     {
@@ -35,33 +23,6 @@ if (!function_exists('curlCall')) {
             'terminal-id' => $terminalID,
             'Authorization' => $authorization,
         ])->$method($endpoint, $params);
-    }
-}
-
-if (!function_exists('curlSMSCall')) {
-    function curlSMSCall($endpoint, $params, $accountSid, $accountToken, $method)
-    {
-        return Http::withHeaders([
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'User-Agent' => 'PostmanRuntime/7.32.3',
-            'Accept' => '*/*',
-            'Accept-Encoding' => 'gzip, deflate',
-            'Connection' => 'keep-alive',
-        ])->withOptions([
-            'auth' => [$accountSid, $accountToken],
-        ])->asForm()->$method($endpoint, $params);
-    }
-}
-
-if (!function_exists('generateUPC')) {
-    function generateUPC($length = 13)
-    {
-        $digit = '0123456789';
-        $upc = '';
-        for ($i = 0; $i < $length; $i++) {
-            $upc .= $digit[random_int(0, strlen($digit) - 1)];
-        }
-        return $upc;
     }
 }
 
