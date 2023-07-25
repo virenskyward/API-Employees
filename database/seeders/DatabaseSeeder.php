@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            LeaveTypeSeeder::class
+            // LeaveTypeSeeder::class
+            PayrollerSettingSeeder::class
         ]);
     }
 }

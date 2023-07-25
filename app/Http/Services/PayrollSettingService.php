@@ -24,14 +24,14 @@ class PayrollSettingService
                 'pay_day' => $input['pay_day'],
                 'created_from' => request()->header('terminal_id'),
                 'created_at' => getCurrentDateTime(),
-                'created_by' => auth()->user()->user_id,
+                'created_by' => 1,//auth()->user()->user_id,
             ];
 
             $this->payrollSettingRepository->create($data);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.create', ['module' => __('messages.module.payroll_setting')]),
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.payroll_setting')]),
                 'code' => Response::HTTP_OK
             ];
         } catch (\Exception $e) {
@@ -51,14 +51,14 @@ class PayrollSettingService
                 'pay_day' => $input['pay_day'],
                 'updated_from' => request()->header('terminal_id'),
                 'updated_at' => getCurrentDateTime(),
-                'updated_by' => auth()->user()->user_id,
+                'updated_by' => 1,//auth()->user()->user_id,
             ];
 
             $this->payrollSettingRepository->update($data, $input['payroll_setting_id']);
 
             return [
                 'status' => true,
-                'message' => __('messages.common.update', ['module' => __('messages.module.payroll_setting')]),
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.payroll_setting')]),
                 'code' => Response::HTTP_OK
             ];
         } catch (\Exception $e) {
@@ -86,7 +86,7 @@ class PayrollSettingService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.list', ['module' => __('messages.module.payroll_setting')]),
+                'message' => __('messages.common.list', ['module' => __('messages.module.hrms.payroll_setting')]),
                 'code' => Response::HTTP_OK,
                 'data' => $data,
             ];
@@ -108,7 +108,7 @@ class PayrollSettingService
 
             return [
                 'status' => true,
-                'message' => __('messages.common.delete', ['module' => __('messages.module.payroll_setting')]),
+                'message' => __('messages.common.delete', ['module' => __('messages.module.hrms.payroll_setting')]),
                 'code' => Response::HTTP_OK
             ];
 
