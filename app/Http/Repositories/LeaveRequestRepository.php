@@ -57,11 +57,8 @@ class LeaveRequestRepository
 
             DB::transaction(function () use ($id) {
 
-                $terminal = LeaveRequest::find($id);
-
-                $terminal->deleted_by = 1;
-                $terminal->save();
-
+                $terminal = LeaveRequest::whereIn('leave_request_id', explode(',',$id));
+                $terminal->update(['deleted_by' => 1]);
                 $terminal->delete();
 
             });
