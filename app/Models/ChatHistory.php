@@ -6,23 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LeaveRequest extends Model
+class ChatHistory extends Model
 {
-    use HasFactory, SoftDeletes;
+     use HasFactory, SoftDeletes;
 
     /**
      * The primary key for the model.
      *
      * @var string
      */
-    protected $primaryKey = 'leave_request_id';
+    protected $primaryKey = 'chat_history_id';
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'leave_requests';
+    protected $table = 'chat_histories';
 
     /**
      * The attributes that are mass assignable.
@@ -30,19 +30,11 @@ class LeaveRequest extends Model
      * @var array
      */
     protected $fillable = [
-        'leave_request_id',
-        'leave_request_uid',
+        'chat_history_id',
+        'chat_history_uid',
         'employee_id',
-        'leave_type',
-        'leave_status',
-        'leave_day',
-        'leave_start_date',
-        'leave_end_date',
-        'leave_notes',
-        'hours_requested',
-        'requested_day',
-        'leave_reason',
-        'deny_reason',
+        'leave_request_id',
+        'chat_detail',
         'created_from',
         'updated_from',
         'created_by',
@@ -63,9 +55,4 @@ class LeaveRequest extends Model
         'updated_at',
         'deleted_at',
     ];
-
-    public function chat()
-    {
-        return $this->hasMany(ChatHistory::class, 'leave_request_id', 'leave_request_id');
-    }
 }

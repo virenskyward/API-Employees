@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\LeaveRequest;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class UpdateLeaveRequest extends FormRequest
+class ChatHistoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,11 @@ class UpdateLeaveRequest extends FormRequest
      */
     public function rules()
     {
-        $leaveRequest = [
-            'leave_request_uid' => 'required',
+        return [
             'employee_id' => 'required',
-            'leave_status' => 'required',
-            'leave_type' => 'required',
-            'leave_start_date' => 'required',
-            'leave_reason'=> 'required',
-            'requested_day' => 'required',
-            'leave_day' => 'required',
+            'leave_request_id' => 'required',
+            'chat_detail' => 'required',
         ];
-
-        if (isset($this->leave_status) && $this->leave_status == 2) {
-            $leaveRequest['deny_reason'] = 'required';
-        }
-        return $leaveRequest;
     }
 
     public function failedValidation(Validator $validator)

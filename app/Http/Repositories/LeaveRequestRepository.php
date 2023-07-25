@@ -2,10 +2,12 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\ChatHistory;
 use App\Models\LeaveRequest;
 use App\Models\LeaveStatistic;
 use App\Models\LeaveType;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class LeaveRequestRepository
 {
@@ -74,14 +76,38 @@ class LeaveRequestRepository
 
     }
 
-    function list($input) {
+    public function list($input) {
 
         try {
 
             $leaveRequest = [];
+            $startDate = '';
+            $endDate = '';
+            if (isset($input['date_filter_type']) && !empty($input['date_filter_type'])) {
+                if ($input['date_filter_type'] == 1) {
+                    $startDate = Carbon::now()->startOfWeek();
+                    $endDate = Carbon::now()->endOfWeek();
+                }
 
-            DB::transaction(function () use ($input, &$leaveRequest) {
-                $leaveRequest = LeaveRequest::paginate($input['limit']);
+                if ($input['date_filter_type'] == 2) {
+                    $startDate = Carbon::now()->startOfMonth();
+                    $endDate = Carbon::now()->endOfMonth();
+                }
+
+                if ($input['date_filter_type'] == 2) {
+                    $startDate = $input['start_date'];
+                    $endDate = $input['end_date'];
+                }
+            }
+
+            DB::transaction(function () use ($input, &$leaveRequest, $startDate, $endDate) {
+                
+                $leaveRequest = LeaveRequest::with(['chat']);
+
+                if((isset($startDate) && !empty($startDate)) && (isset($endDate) && !empty($endDate))) {
+                    $leaveRequest = $leaveRequest->whereBetween('leave_start_date', [$startDate, $endDate]);
+                }
+                $leaveRequest =$leaveRequest->paginate($input['limit']);
             });
 
             return $leaveRequest;
@@ -148,5 +174,25 @@ class LeaveRequestRepository
             error_log($e->getMessage());
             throw $e;
         }
+    }
+
+    public function chatHistory($input)
+    {
+
+        try {
+
+            $data = [];
+            DB::transaction(function () use ($input, &$data) {
+                $data = ChatHistory::create($input);
+            });
+
+            return $data;
+
+        } catch (\Exception $e) {
+
+            error_log($e->getMessage());
+            throw $e;
+        }
+
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\LeaveRequest;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class UpdateLeaveRequest extends FormRequest
+class UpdateLeaveRequestStatus extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +26,9 @@ class UpdateLeaveRequest extends FormRequest
     {
         $leaveRequest = [
             'leave_request_uid' => 'required',
+            'leave_type' => 'required',
             'employee_id' => 'required',
             'leave_status' => 'required',
-            'leave_type' => 'required',
-            'leave_start_date' => 'required',
-            'leave_reason'=> 'required',
-            'requested_day' => 'required',
-            'leave_day' => 'required',
         ];
 
         if (isset($this->leave_status) && $this->leave_status == 2) {

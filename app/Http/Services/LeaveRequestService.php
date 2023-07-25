@@ -29,7 +29,7 @@ class LeaveRequestService
                 'leave_start_date' => $input['leave_start_date'],
                 'leave_end_date' => $input['leave_end_date'] ?? null,
                 'leave_notes' => $input['leave_notes'] ?? null,
-                'hours_requested'=> $input['hours_requested'] ?? null,
+                'hours_requested' => $input['hours_requested'] ?? null,
                 'requested_day' => $input['requested_day'],
                 'leave_reason' => $input['leave_reason'],
                 'created_from' => request()->header('terminal_id'),
@@ -43,7 +43,7 @@ class LeaveRequestService
                 'status' => true,
                 'message' => __('messages.common.create', ['module' => __('messages.module.hrms.leave_request')]),
                 'code' => Response::HTTP_OK,
-                'data' => $data
+                'data' => $data,
             ];
         } catch (\Exception $e) {
 
@@ -52,7 +52,7 @@ class LeaveRequestService
         }
     }
 
-    public function updateLeaveRequest($input)
+    public function updateLeaveRequestStatus($input)
     {
 
         try {
@@ -96,8 +96,7 @@ class LeaveRequestService
 
     }
 
-    public function list($input)
-    {
+    function list($input) {
 
         try {
 
@@ -167,5 +166,65 @@ class LeaveRequestService
             throw $e;
         }
 
+    }
+
+    public function updateLeaveRequest($input)
+    {
+        try {
+
+            $data = [
+                'leave_request_uid' => Str::upper(Str::random(10)),
+                'employee_id' => $input['employee_id'],
+                'leave_type' => $input['leave_type'],
+                'leave_status' => 0,
+                'leave_day' => $input['leave_day'],
+                'leave_start_date' => $input['leave_start_date'],
+                'leave_end_date' => $input['leave_end_date'] ?? null,
+                'leave_notes' => $input['leave_notes'] ?? null,
+                'hours_requested' => $input['hours_requested'] ?? null,
+                'requested_day' => $input['requested_day'],
+                'leave_reason' => $input['leave_reason'],
+                'updated_from' => request()->header('terminal_id'),
+                'updated_at' => getCurrentDateTime(),
+                'updated_by' => $input['employee_id'],
+            ];
+            $this->leaveRequestRepository->update($data, $input['leave_request_uid']);
+
+            return [
+                'status' => true,
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.leave_request')]),
+                'code' => Response::HTTP_OK,
+            ];
+        } catch (\Exception $e) {
+
+            error_log($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function chatHistory($input)
+    {
+        try {
+            $data = [
+                'chat_history_uid' => Str::upper(Str::random(10)),
+                'employee_id' => $input['employee_id'],
+                'leave_request_id' => $input['leave_request_id'],
+                'chat_detail' => $input['chat_detail'],
+                'created_from' => request()->header('terminal-id'),
+                'created_at' => getCurrentDateTime(),
+                'created_by' => 1,
+            ];
+            $this->leaveRequestRepository->chatHistory($data);
+
+            return [
+                'status' => true,
+                'message' => __('messages.common.update', ['module' => __('messages.module.hrms.leave_request')]),
+                'code' => Response::HTTP_OK,
+            ];
+        } catch (\Exception $e) {
+
+            error_log($e->getMessage());
+            throw $e;
+        }
     }
 }

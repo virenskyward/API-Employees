@@ -77,9 +77,11 @@ Route::middleware(['permission'])->group(function () {
     Route::group(['prefix' => 'leave-request'], function () {
         Route::post('/list', [LeaveRequestController::class, 'list'])->name('leave.request.list');
         Route::post('/create', [LeaveRequestController::class, 'createLeaveRequest'])->name('leave.request.create');
-        Route::post('/update', [LeaveRequestController::class, 'updateLeaveRequest'])->name('leave.request.update');
+        Route::post('/update-status', [LeaveRequestController::class, 'updateLeaveRequestStatus'])->name('leave.request.update-status');
         Route::delete('/delete/{id}', [LeaveRequestController::class, 'destroy'])->name('leave.request.destroy');
         Route::post('/get-leave-request', [LeaveRequestController::class, 'getLeaveRequest'])->name('leave.request.get');
+        Route::post('/update', [LeaveRequestController::class, 'updateLeaveRequest'])->name('leave.request.update');
+        Route::post('/chat', [LeaveRequestController::class, 'chatHistory'])->name('leave.request.chat');
     });
 
     Route::group(['prefix' => 'leave'], function () {
