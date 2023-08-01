@@ -23,7 +23,8 @@ return [
             'role' => 'Role',
             'leave_request' => 'Leave Request',
             'leave_type' => 'Leave Type',
-            'payroll_setting' => 'Payroll setting'
+            'payroll_setting' => 'Payroll setting',
+            'shift_scheduler' => 'Shift scheduler'
         ]
     ],
     'permission_action_access_denide' => 'You Do not have permission',

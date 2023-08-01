@@ -68,4 +68,9 @@ class LeaveRequest extends Model
     {
         return $this->hasMany(ChatHistory::class, 'leave_request_id', 'leave_request_id');
     }
+
+    public function shiftScheduler()
+    {
+        return $this->hasMany(ShiftScheduler::class, 'employee_id', 'employee_id');
+    }
 }

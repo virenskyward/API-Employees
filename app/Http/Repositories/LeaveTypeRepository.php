@@ -1,6 +1,6 @@
 <?php
 
-namespace App\HTTP\Repositories;
+namespace App\Http\Repositories;
 
 use App\Models\LeaveType;
 use Exception;

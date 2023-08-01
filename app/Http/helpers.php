@@ -37,3 +37,10 @@ if (!function_exists('failedValidation')) {
         ]));
     }
 }
+
+if (!function_exists('generateUPC')) {
+    function generateUPC()
+    {
+        return time().rand(10000,99999);
+    }
+}

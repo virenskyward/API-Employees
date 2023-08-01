@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PermissionActionController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\PermissionModuleController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\ShiftSchedulerController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -91,6 +92,14 @@ Route::middleware(['permission'])->group(function () {
         Route::post('/leavetypes/{leaveTypeId}', [LeaveTypeController::class, 'update'])->name('leave_types.update');
         Route::delete('/leavetypes/{leaveTypeId}', [LeaveTypeController::class, 'destroy'])
             ->name('leave_types.destroy');
+    });
+
+    Route::group(['prefix' => 'shift-scheduler'], function () {
+        Route::post('/create', [ShiftSchedulerController::class, 'setShiftScheduler'])->name('shift.scheduler.create');
+        Route::post('/get-shift-scheduler', [ShiftSchedulerController::class, 'getShiftScheduler'])
+            ->name('shift.scheduler.list');
+        Route::post('/copy-shift', [ShiftSchedulerController::class, 'copyShiftScheduler'])
+            ->name('shift.scheduler.copy');
     });
 });
 // });

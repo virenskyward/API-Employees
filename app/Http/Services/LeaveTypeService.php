@@ -1,6 +1,6 @@
 <?php
 
-namespace App\http\Services;
+namespace App\Http\Services;
 
 use App\Http\Repositories\LeaveTypeRepository;
 use Illuminate\Http\Response;

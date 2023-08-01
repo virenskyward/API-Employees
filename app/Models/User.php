@@ -114,4 +114,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserTimesheet::class, 'user_id', 'user_id');
     }
+
+    public function leaveRequest()
+    {
+        return $this->hasMany(LeaveRequest::class, 'employee_id', 'user_id');
+    }
+
+    public function shiftScheduler()
+    {
+        return $this->hasMany(ShiftScheduler::class, 'employee_id', 'user_id');
+    }
 }
