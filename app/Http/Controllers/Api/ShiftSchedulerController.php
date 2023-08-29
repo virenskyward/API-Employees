@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShiftSchedulerRequest\CopyShiftSchedulerRequest;
+use App\Http\Requests\ShiftSchedulerRequest\CopyShiftToWeekRequest;
 use App\Http\Requests\ShiftSchedulerRequest\SetShiftSchedulerRequest;
 use App\Http\Services\ShiftSchedulerService;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ class ShiftSchedulerController extends Controller
     public function copyShiftScheduler(CopyShiftSchedulerRequest $request)
     {
         $response = $this->shiftSchedulerService->copyShiftScheduler($request->all());
+        return $this->sendResponse($response);
+    }
+
+    public function copyShiftToWeek(CopyShiftToWeekRequest $request)
+    {
+        $response = $this->shiftSchedulerService->copyShiftToWeek($request->all());
         return $this->sendResponse($response);
     }
 }

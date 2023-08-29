@@ -24,7 +24,8 @@ return [
             'leave_request' => 'Leave Request',
             'leave_type' => 'Leave Type',
             'payroll_setting' => 'Payroll setting',
-            'shift_scheduler' => 'Shift scheduler'
+            'shift_scheduler' => 'Shift scheduler',
+            'copy_shift_to_week' => 'Copy shift scheduler to week'
         ]
     ],
     'permission_action_access_denide' => 'You Do not have permission',

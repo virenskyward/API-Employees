@@ -91,7 +91,7 @@ class ShiftSchedulerService
                     foreach ($data['shiftScheduler'] as $data) {
 
                         $nextShiftDate = date('Y-m-d', strtotime("+7 day", strtotime($data['shift_date'])));
-                       
+
                         $copyData[] = [
                             'shift_scheduler_uid' => Str::upper(Str::random(10)),
                             'employee_id' => $data['employee_id'],
@@ -117,6 +117,38 @@ class ShiftSchedulerService
         } catch (\Exception $e) {
 
             error_log($e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function copyShiftToWeek($input)
+    {
+        try {
+            if (isset($input['shift_data']) && !empty($input['shift_data'])) {
+                $copyData = [];
+                foreach ($input['shift_data'] as $data) {
+                    $copyData[] = [
+                        'shift_scheduler_uid' => Str::upper(Str::random(10)),
+                        'employee_id' => $input['employee_id'],
+                        'shift_date' => $data['shift_date'],
+                        'shift_start_time' => $data['shift_start_time'],
+                        'shift_end_time' => $data['shift_end_time'],
+                        'shift_total_time' => $data['shift_total_time'],
+                        'created_from' => request()->header('terminal-id'),
+                        'created_by' => 1,
+                        'created_at' => getCurrentDateTime(),
+                    ];
+                }
+                $result = $this->shiftSchedulerRepository->copyShiftToWeek($copyData);
+            }
+
+            return [
+                'status' => true,
+                'message' => __('messages.common.create', ['module' => __('messages.module.hrms.copy_shift_to_week')]),
+                'code' => Response::HTTP_OK,
+                'data' => $result,
+            ];
+        } catch (\Exception $e) {
             throw $e;
         }
     }

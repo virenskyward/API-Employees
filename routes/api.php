@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware(['userauth'])->group(function () {
+// Route::middleware(['userauth'])->group(function () {
     Route::middleware(['permission'])->group(function () {
 
         Route::group(['prefix' => 'user'], function () {
@@ -96,10 +96,9 @@ Route::middleware(['userauth'])->group(function () {
 
         Route::group(['prefix' => 'shift-scheduler'], function () {
             Route::post('/create', [ShiftSchedulerController::class, 'setShiftScheduler'])->name('shift.scheduler.create');
-            Route::post('/get-shift-scheduler', [ShiftSchedulerController::class, 'getShiftScheduler'])
-                ->name('shift.scheduler.list');
-            Route::post('/copy-shift', [ShiftSchedulerController::class, 'copyShiftScheduler'])
-                ->name('shift.scheduler.copy');
+            Route::post('/get-shift-scheduler', [ShiftSchedulerController::class, 'getShiftScheduler'])->name('shift.scheduler.list');
+            Route::post('/copy-shift', [ShiftSchedulerController::class, 'copyShiftScheduler'])->name('shift.scheduler.copy');
+            Route::post('/copy-shift-to-week', [ShiftSchedulerController::class, 'copyShiftToWeek'])->name('shift.scheduler.copy-shift-to-week ');
         });
     });
-});
+// });

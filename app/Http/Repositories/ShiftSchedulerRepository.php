@@ -75,8 +75,17 @@ class ShiftSchedulerRepository
         try {
 
             $shiftData = [];
-            DB::transaction(function () use ($input, &$shiftData) {
+            $today = isset($input['btn_date']) ? Carbon::parse($input['btn_date']) : Carbon::now();
+            $startDate = $today->clone()->startOfWeek();
+            $endDate = $today->clone()->endOfWeek();
+
+            DB::transaction(function () use ($input, &$shiftData, $startDate, $endDate) {
                 $shiftData = ShiftScheduler::insert($input);
+
+                if ($shiftData) {
+                    $shiftData = ShiftScheduler::whereBetween('shift_date', [$startDate, $endDate])
+                        ->where('employee_id', $input[0]['employee_id'])->get();
+                }
             });
 
             return $shiftData;
@@ -87,4 +96,39 @@ class ShiftSchedulerRepository
             throw $e;
         }
     }
+
+    public function copyShiftToWeek($input)
+    {
+        try {
+            $shiftData = [];
+            $today = isset($input['btn_date']) ? Carbon::parse($input['btn_date']) : Carbon::now();
+            $startDate = $today->clone()->startOfWeek();
+            $endDate = $today->clone()->endOfWeek();
+
+            DB::transaction(function () use ($input, &$shiftData, $startDate, $endDate) {
+                $deletedRows = ShiftScheduler::where('employee_id', $input[0]['employee_id'])
+                    ->whereDate('shift_date', '>=', $startDate)
+                    ->whereDate('shift_date', '<=', $endDate)
+                    ->update([
+                        'deleted_by' => 1,
+                        'deleted_at' => getCurrentDateTime(),
+                    ]);
+
+                $shiftData = ShiftScheduler::insert($input);
+
+                if ($shiftData) {
+                    $shiftData = ShiftScheduler::whereBetween('shift_date', [$startDate, $endDate])
+                        ->where('employee_id', $input[0]['employee_id'])->get();
+                }
+            });
+
+            return $shiftData;
+
+        } catch (\Exception $e) {
+
+            error_log($e->getMessage());
+            throw $e;
+        }
+    }
+
 }
